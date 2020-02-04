@@ -1,8 +1,8 @@
 import Home from './components/Home.vue';
-import Porfolio from './components/Home.vue';
-import PorfolioStock from './components/Home.vue';
-import Stocks from './components/Home.vue';
-import StocksStock from './components/Home.vue';
+import Porfolio from './components/porfolio/Porfolio.vue';
+import PorfolioStock from './components/porfolio/Stock.vue';
+import Stocks from './components/stocks/Stocks.vue';
+import StocksStock from './components/stocks/Stock.vue';
 
 export const routes = [
   { path: '/', component: Home, name: 'home' },
