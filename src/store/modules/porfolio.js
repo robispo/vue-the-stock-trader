@@ -9,21 +9,47 @@ const mutations = {
   buyStock: (state, stock) => {
     const r = state.stocks.find(e => e.id == stock.stockId);
     if (r) {
-      r.quantitiy += stock.quantitiy;
+      r.quantity += stock.quantity;
     } else {
       state.stocks.push({
         id: stock.stockId,
-        quantitiy: stock.quantitiy
+        quantity: stock.quantity
       });
     }
+    state.funds -= stock.quantity * stock.stockPrice;
+  },
+  sellStock: (state, stock) => {
+    const r = state.stocks.find(e => e.id == stock.stockId);
+    let moneyBack = 0;
+
+    if (r.quantity > stock.quantity) {
+      r.quantity -= stock.quantity;
+      moneyBack = stock.quantity * stock.stockPrice;
+    } else {
+      moneyBack = r.quantity * stock.stockPrice;
+      state.stocks.splice(state.stocks.indexOf(r), 1);
+    }
+    state.funds += moneyBack;
   }
 };
 
 const actions = {
+  sellStock: ({ commit }, order) => commit.dispatch('sellStock', order)
 };
 
 const getters = {
-  stocks: s => s.stocks
+  stockPorfolio: (s, g) => {
+    return s.stocks.map(e => {
+      const r = g.stocks.find(gs => gs.id == e.id);
+      return {
+        id: e.id,
+        quantity: e.quantity,
+        name: r.name,
+        price: r.price
+      };
+    });
+  },
+  funds: s => s.funds
 };
 
 export default {
