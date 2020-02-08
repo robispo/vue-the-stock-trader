@@ -21,11 +21,7 @@
           <button
             class="btn btn-success"
             @click.prevent="buyStock"
-            :disabled="
-              Number(quantity) <= 0 ||
-                !Number.isInteger(Number(quantity)) ||
-                Number(quantity) * stock.price > funds
-            "
+            :disabled="cannotBuy"
           >
             Buy
           </button>
@@ -46,7 +42,14 @@
       };
     },
     computed: {
-      ...mapGetters(['funds'])
+      ...mapGetters(['funds']),
+      cannotBuy() {
+        return (
+          Number(this.quantity) <= 0 ||
+          !Number.isInteger(Number(this.quantity)) ||
+          Number(this.quantity) * this.stock.price > this.funds
+        );
+      }
     },
     methods: {
       buyStock() {
