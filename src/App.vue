@@ -3,7 +3,13 @@
     <app-header></app-header>
     <div class="row">
       <div class="col-xs-12">
-        <router-view></router-view>
+        <transition
+          mode="out-in"
+          enter-active-class="animated slideInLeft"
+          leave-active-class="animated slideOutRight"
+        >
+          <router-view></router-view>
+        </transition>
       </div>
     </div>
   </div>
@@ -17,12 +23,12 @@
     },
     created() {
       this.$store.dispatch('initStocks');
-    },
+    }
   };
 </script>
 
 <style>
-body{
+  body {
     padding: 30px;
-}
+  }
 </style>

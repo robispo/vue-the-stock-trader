@@ -1,8 +1,8 @@
 {
-  "name": "vue-cli",
+  "name": "stock-trader",
   "description": "A Vue.js project",
   "author": "Rabel Obispo <rabelobispo@hotmail.com>",
-  "private": false,
+  "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --inline --hot",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
