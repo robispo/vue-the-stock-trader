@@ -15,16 +15,7 @@
             ><a>Stocks</a>
           </router-link>
         </ul>
-          <app-money
-            :value="funds"
-            :locale="en"
-            :currency-code="USD"
-            :subunit-value="true"
-            :hide-subunits="true"
-            tag="strong"
-            prefix="Funds:"
-            class="navbar-text navbar-right"
-          ></app-money>
+        <strong class="navbar-text navbar-right">Funds: {{ funds | currency }}</strong>
         <ul class="nav navbar-nav navbar-right">
           <li><a href="#">End day</a></li>
           <li class="dropdown">
@@ -52,12 +43,8 @@
 
 <script>
   import { mapGetters } from 'vuex';
-  import MoneyFormat from 'vue-money-format';
 
   export default {
-    components: {
-      appMoney: MoneyFormat
-    },
     computed: {
       ...mapGetters(['funds'])
     }
