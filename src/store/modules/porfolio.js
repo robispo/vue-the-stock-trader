@@ -1,5 +1,3 @@
-import dataStocks from '../../data/stocks.js';
-
 const state = {
   stocks: [],
   funds: 10000
@@ -34,7 +32,7 @@ const mutations = {
 };
 
 const actions = {
-  sellStock: ({ commit }, order) => commit.dispatch('sellStock', order)
+  sellStock: ({ commit }, order) => commit('sellStock', order)
 };
 
 const getters = {

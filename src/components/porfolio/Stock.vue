@@ -1,6 +1,6 @@
 <template>
   <div class="col-sm-6 col-md-4">
-    <div class="panel panel-success">
+    <div class="panel panel-info">
       <div class="panel-heading">
         <h3 class="panel-title">
           {{ stock.name }}
@@ -23,7 +23,7 @@
         </div>
         <div class="pull-right">
           <button
-            class="btn btn-success"
+            class="btn btn-info"
             @click.prevent="sellStock"
             :disabled="
               Number(quantity) <= 0 || !Number.isInteger(Number(quantity))
