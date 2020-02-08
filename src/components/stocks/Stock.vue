@@ -22,7 +22,9 @@
             class="btn btn-success"
             @click.prevent="buyStock"
             :disabled="
-              Number(quantity) <= 0 || !Number.isInteger(Number(quantity))
+              Number(quantity) <= 0 ||
+                !Number.isInteger(Number(quantity)) ||
+                Number(quantity) * stock.price > funds
             "
           >
             Buy
@@ -34,12 +36,17 @@
 </template>
 
 <script>
+  import { mapGetters } from 'vuex';
+
   export default {
     props: ['stock'],
     data() {
       return {
         quantity: ''
       };
+    },
+    computed: {
+      ...mapGetters(['funds'])
     },
     methods: {
       buyStock() {

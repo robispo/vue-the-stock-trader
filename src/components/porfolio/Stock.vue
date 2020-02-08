@@ -26,7 +26,9 @@
             class="btn btn-info"
             @click.prevent="sellStock"
             :disabled="
-              Number(quantity) <= 0 || !Number.isInteger(Number(quantity))
+              Number(quantity) <= 0 ||
+                !Number.isInteger(Number(quantity)) ||
+                Number(quantity) > stock.quantity
             "
           >
             Sell
