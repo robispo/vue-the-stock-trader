@@ -8,7 +8,7 @@
       </div>
       <div class="panel-body">
         <div class="pull-left">
-          <div class="form-grou">
+          <div class="form-group" :class="{ 'has-error': isInvalidInput }">
             <input
               type="number"
               placeholder="Quantity"
@@ -49,6 +49,13 @@
           !Number.isInteger(Number(this.quantity)) ||
           Number(this.quantity) * this.stock.price > this.funds
         );
+      },
+      isInvalidInput() {
+        if (this.quantity == '') {
+          return false;
+        } else {
+          return this.cannotBuy;
+        }
       }
     },
     methods: {
