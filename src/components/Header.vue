@@ -15,9 +15,11 @@
             ><a>Stocks</a>
           </router-link>
         </ul>
-        <strong class="navbar-text navbar-right">Funds: {{ funds | currency }}</strong>
+        <strong class="navbar-text navbar-right"
+          >Funds: {{ funds | currency }}</strong
+        >
         <ul class="nav navbar-nav navbar-right">
-          <li><a href="#">End day</a></li>
+          <li><a @click.prevent="endDay">End day</a></li>
           <li class="dropdown">
             <a
               href="#"
@@ -42,11 +44,17 @@
 </template>
 
 <script>
-  import { mapGetters } from 'vuex';
+  import { mapGetters, mapActions } from 'vuex';
 
   export default {
     computed: {
       ...mapGetters(['funds'])
+    },
+    methods: {
+      ...mapActions(['initStocks', 'ramdomizeStocks']),
+      endDay() {
+        this.ramdomizeStocks();
+      }
     }
   };
 </script>

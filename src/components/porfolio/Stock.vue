@@ -12,7 +12,7 @@
       </div>
       <div class="panel-body">
         <div class="pull-left">
-          <div class="form-group" :class="{ 'has-error': isInvalidInput }">
+          <div class="form-group">
             <input
               type="number"
               placeholder="Quantity"
