@@ -28,11 +28,19 @@ const mutations = {
       state.stocks.splice(state.stocks.indexOf(r), 1);
     }
     state.funds += moneyBack;
+  },
+  loadDataPorfolio: (s, d) => {
+    s.funds = d.funds;
+    s.stocks = d.stockPorfolio;
   }
 };
 
 const actions = {
-  sellStock: ({ commit }, order) => commit('sellStock', order)
+  sellStock: ({ commit }, order) => commit('sellStock', order),
+  loadDataPorfolio: ({ commit }, data) => {
+    commit('loadDataPorfolio', data);
+    commit('loadDataStocks', data);
+  }
 };
 
 const getters = {

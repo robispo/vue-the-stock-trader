@@ -20,9 +20,12 @@
         >
         <ul class="nav navbar-nav navbar-right">
           <li><a @click.prevent="endDay">End day</a></li>
-          <li class="dropdown">
+          <li
+            class="dropdown"
+            :class="{ open: isDropDownOpen }"
+            @click.prevent="isDropDownOpen = !isDropDownOpen"
+          >
             <a
-              href="#"
               class="dropdown-toggle"
               data-toggle="dropdown"
               role="button"
@@ -31,8 +34,8 @@
               >Save & Load <span class="caret"></span
             ></a>
             <ul class="dropdown-menu">
-              <li><a href="#">Save Data</a></li>
-              <li><a href="#">Load Data</a></li>
+              <li><a @click.prevent="saveData">Save Data</a></li>
+              <li><a @click.prevent="loadData">Load Data</a></li>
             </ul>
           </li>
         </ul>
@@ -47,13 +50,36 @@
   import { mapGetters, mapActions } from 'vuex';
 
   export default {
+    data() {
+      return {
+        isDropDownOpen: false
+      };
+    },
     computed: {
-      ...mapGetters(['funds'])
+      ...mapGetters(['funds', 'stockPorfolio', 'stocks'])
     },
     methods: {
-      ...mapActions(['initStocks', 'ramdomizeStocks']),
+      ...mapActions(['initStocks', 'ramdomizeStocks', 'loadData']),
       endDay() {
         this.ramdomizeStocks();
+      },
+      saveData() {
+        const data = {
+          stockPorfolio: this.stockPorfolio,
+          funds: this.funds,
+          stocks: this.stocks
+        };
+
+        this.$http.put('data.json', data).then(
+          r => console.log(r.json()),
+          e => console.log(e)
+        );
+      },
+      loadData() {
+        this.$http.get('data.json').then(
+          r => this.loadData(r.json()),
+          e => console.log(e)
+        );
       }
     }
   };
