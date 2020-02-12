@@ -24,9 +24,6 @@ const actions = {
   },
   ramdomizeStocks: ({ commit }) => {
     commit('rndStocks');
-  },
-  loadDataStocks: ({ commit }, data) => {
-    commit('setStocks', data.stocks);
   }
 };
 

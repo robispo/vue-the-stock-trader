@@ -39,7 +39,7 @@ const actions = {
   sellStock: ({ commit }, order) => commit('sellStock', order),
   loadDataPorfolio: ({ commit }, data) => {
     commit('loadDataPorfolio', data);
-    commit('loadDataStocks', data);
+    commit('setStocks', data.stocks);
   }
 };
 

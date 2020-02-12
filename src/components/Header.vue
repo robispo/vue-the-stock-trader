@@ -19,7 +19,7 @@
           >Funds: {{ funds | currency }}</strong
         >
         <ul class="nav navbar-nav navbar-right">
-          <li><a @click.prevent="endDay">End day</a></li>
+          <li><a @click.prevent="endDay" class="pointer">End day</a></li>
           <li
             class="dropdown"
             :class="{ open: isDropDownOpen }"
@@ -34,8 +34,12 @@
               >Save & Load <span class="caret"></span
             ></a>
             <ul class="dropdown-menu">
-              <li><a @click.prevent="saveData">Save Data</a></li>
-              <li><a @click.prevent="loadData">Load Data</a></li>
+              <li>
+                <a @click.prevent="saveData" class="pointer">Save Data</a>
+              </li>
+              <li>
+                <a @click.prevent="loadData" class="pointer">Load Data</a>
+              </li>
             </ul>
           </li>
         </ul>
@@ -59,7 +63,7 @@
       ...mapGetters(['funds', 'stockPorfolio', 'stocks'])
     },
     methods: {
-      ...mapActions(['initStocks', 'ramdomizeStocks', 'loadData']),
+      ...mapActions(['initStocks', 'ramdomizeStocks', 'loadDataPorfolio']),
       endDay() {
         this.ramdomizeStocks();
       },
@@ -76,13 +80,20 @@
         );
       },
       loadData() {
-        this.$http.get('data.json').then(
-          r => this.loadData(r.json()),
-          e => console.log(e)
-        );
+        this.$http
+          .get('data.json')
+          .then(
+            r => r.json(),
+            e => console.log(e)
+          )
+          .then(d => this.loadDataPorfolio(d));
       }
     }
   };
 </script>
 
-<style scoped></style>
+<style scoped>
+  .pointer {
+    cursor: pointer;
+  }
+</style>
