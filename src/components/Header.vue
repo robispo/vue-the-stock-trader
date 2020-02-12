@@ -35,10 +35,10 @@
             ></a>
             <ul class="dropdown-menu">
               <li>
-                <a @click.prevent="saveData" class="pointer">Save Data</a>
+                <a @click.prevent="aSaveData" class="pointer">Save Data</a>
               </li>
               <li>
-                <a @click.prevent="loadData" class="pointer">Load Data</a>
+                <a @click.prevent="aLoadData" class="pointer">Load Data</a>
               </li>
             </ul>
           </li>
@@ -63,30 +63,19 @@
       ...mapGetters(['funds', 'stockPorfolio', 'stocks'])
     },
     methods: {
-      ...mapActions(['initStocks', 'ramdomizeStocks', 'loadDataPorfolio']),
+      ...mapActions(['initStocks', 'ramdomizeStocks', 'saveData', 'loadData']),
       endDay() {
         this.ramdomizeStocks();
       },
-      saveData() {
-        const data = {
+      aSaveData() {
+        this.saveData({
           stockPorfolio: this.stockPorfolio,
           funds: this.funds,
           stocks: this.stocks
-        };
-
-        this.$http.put('data.json', data).then(
-          r => console.log(r.json()),
-          e => console.log(e)
-        );
+        });
       },
-      loadData() {
-        this.$http
-          .get('data.json')
-          .then(
-            r => r.json(),
-            e => console.log(e)
-          )
-          .then(d => this.loadDataPorfolio(d));
+      aLoadData() {
+        this.loadData();
       }
     }
   };

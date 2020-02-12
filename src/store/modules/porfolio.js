@@ -29,18 +29,14 @@ const mutations = {
     }
     state.funds += moneyBack;
   },
-  loadDataPorfolio: (s, d) => {
-    s.funds = d.funds;
-    s.stocks = d.stockPorfolio;
+  loadDataPorfolio: (s, { funds, stockPorfolio }) => {
+    s.funds = funds;
+    s.stocks = stockPorfolio;
   }
 };
 
 const actions = {
-  sellStock: ({ commit }, order) => commit('sellStock', order),
-  loadDataPorfolio: ({ commit }, data) => {
-    commit('loadDataPorfolio', data);
-    commit('setStocks', data.stocks);
-  }
+  sellStock: ({ commit }, order) => commit('sellStock', order)
 };
 
 const getters = {
